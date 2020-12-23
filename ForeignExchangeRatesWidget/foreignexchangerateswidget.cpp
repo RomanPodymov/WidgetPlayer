@@ -41,7 +41,7 @@ void ForeignExchangeRatesWidget::parseRensonse(QString response) {
     const auto& jsonObject = jsonResponse.object();
     const auto& rates = jsonObject["rates"].toObject();
     const auto& targetCurrencyRate = rates[foreignExchangeRatesWidgetAdditionalData->targetCurrency].toDouble();
-    currentRateLabel->setText(QString::number(targetCurrencyRate));
+    currentRateLabel->setText(QString::number(targetCurrencyRate) + " " + foreignExchangeRatesWidgetAdditionalData->targetCurrency);
 }
 
 void ForeignExchangeRatesWidget::afterAPIReply() {
