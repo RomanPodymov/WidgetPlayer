@@ -16,8 +16,9 @@
 #include <QJsonObject>
 #include <QTimer>
 
-MainWidget::MainWidget(QWidget *parent): QWidget(parent),
+MainWidget::MainWidget(QApplication& application, QWidget *parent): QWidget(parent),
     stateLabel(new QLabel(this)),
+    application(application),
     networkAccessManager(new QNetworkAccessManager()),
     widgetState(WidgetState::unknown),
     localConfiguration(MainWidget::readLocalConfigurationJSON()),
@@ -174,6 +175,7 @@ void MainWidget::updateUI(WidgetData widgetData) {
             if (rowWidget != nullptr) {
                 QObject::connect(this, SIGNAL(rootScreenSizeChanged(QSize)), rowWidget, SLOT(onRootScreenSizeChanged(QSize)));
                 rowWidget->setupSize(frameSize());
+                application.installTranslator(&rowWidget->translator);
                 itemsLayout->addWidget(rowWidget);
             }
         }

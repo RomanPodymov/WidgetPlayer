@@ -12,5 +12,12 @@ HEADERS += \
     weatherwidget.h \
     weatherwidgetadditionaldata.h
 
+TRANSLATIONS += \
+    Translations/Translations_WeatherWidget_en.ts \
+    Translations/Translations_WeatherWidget_cs.ts
+
 INCLUDEPATH += \
     ../BaseWidget
+
+RESOURCES += \
+    weatherwidgetresources.qrc

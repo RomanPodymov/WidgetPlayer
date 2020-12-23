@@ -10,6 +10,7 @@
 #define MAINWIDGET_H
 
 #include "widgetdata.h"
+#include <QApplication>
 #include <QPointer>
 #include <QWidget>
 #include <QLabel>
@@ -22,7 +23,7 @@ class MainWidget: public QWidget {
     Q_OBJECT
 
 public:
-    MainWidget(QWidget *parent = nullptr);
+    MainWidget(QApplication& application, QWidget *parent = nullptr);
     ~MainWidget();
 
 signals:
@@ -45,6 +46,7 @@ private:
     const QPointer<QLabel> stateLabel;
 
 private:
+    QApplication& application;
     const QSharedPointer<QNetworkAccessManager> networkAccessManager;
     WidgetState widgetState;
     const QJsonObject localConfiguration;

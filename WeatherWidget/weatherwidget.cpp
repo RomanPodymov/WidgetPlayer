@@ -15,6 +15,7 @@
 
 WeatherWidget::WeatherWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): BaseWidget(row, item, parent),
     currentTemperatureLabel(new QLabel(this)) {
+    translator.load(":/translations_weather/weather_strings");
     QPointer<QVBoxLayout> rootLayout(new QVBoxLayout());
     rootLayout->setAlignment(Qt::AlignLeading | Qt::AlignTop);
     setLayout(rootLayout);
@@ -42,7 +43,7 @@ void WeatherWidget::parseRensonse(QString response) {
     const auto& jsonObject = jsonResponse.object();
     const auto& mainData = jsonObject["main"].toObject();
     const auto& mainDataTemp = mainData["temp"].toDouble();
-    currentTemperatureLabel->setText(WeatherWidget::tr("%n degree(s)", "", mainDataTemp));
+    currentTemperatureLabel->setText((mainDataTemp > 0 ? "+" : "-") + WeatherWidget::tr("%n degree(s)", "", abs(mainDataTemp)));
 }
 
 void WeatherWidget::afterWeatherAPIReply() {

@@ -11,11 +11,12 @@
 #include <QTranslator>
 
 int main(int argc, char *argv[]) {
+    Q_INIT_RESOURCE(weatherwidgetresources);
     QApplication a(argc, argv);
     QTranslator translator;
     translator.load(":/translations/strings");
     a.installTranslator(&translator);
-    MainWidget w;
+    MainWidget w(a);
     w.show();
     return a.exec();
 }

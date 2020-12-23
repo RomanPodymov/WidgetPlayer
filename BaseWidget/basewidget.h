@@ -12,6 +12,7 @@
 #include "widgetdata.h"
 #include <QWidget>
 #include <QNetworkAccessManager>
+#include <QTranslator>
 
 class BaseWidget : public QWidget {
     Q_OBJECT
@@ -28,6 +29,9 @@ protected:
 
 private slots:
     void onBackgroundImageReply(QNetworkReply*);
+
+public:
+    QTranslator translator;
 
 protected:
     const QSharedPointer<QNetworkAccessManager> networkAccessManager;

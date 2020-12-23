@@ -12,8 +12,8 @@ HEADERS += \
     mainwidget.h
 
 TRANSLATIONS += \
-    Translations/Translations_WidgetPlayer_en.ts \
-    Translations/Translations_WidgetPlayer_cs.ts
+    Translations/Translations_App_en.ts \
+    Translations/Translations_App_cs.ts
 
 INCLUDEPATH += \
     ../BaseWidget \
