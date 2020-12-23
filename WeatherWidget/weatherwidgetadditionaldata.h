@@ -1,6 +1,6 @@
 //
 //  weatherwidgetadditionaldata.h
-//  WidgetPlayer
+//  WeatherWidget
 //
 //  Created by Roman Podymov on 22/12/2020.
 //  Copyright © 2020 WidgetPlayer. All rights reserved.

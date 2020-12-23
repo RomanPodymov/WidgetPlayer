@@ -1,6 +1,6 @@
 //
 //  widgetdata.cpp
-//  WidgetPlayer
+//  BaseWidget
 //
 //  Created by Roman Podymov on 07/12/2020.
 //  Copyright © 2020 WidgetPlayer. All rights reserved.
@@ -15,6 +15,8 @@ WidgetData::WidgetData() {
 WidgetData::WidgetType WidgetData::widgetTypeFromString(QString typeString) {
     if (typeString == "weather") {
         return WidgetData::WidgetType::weather;
+    } else if (typeString == "rates") {
+        return WidgetData::WidgetType::foreignexchangerates;
     } else {
         return WidgetData::WidgetType::unknown;
     }
@@ -107,7 +109,18 @@ bool operator == (const WidgetData::Row::Item& lhs, const WidgetData::Row::Item&
             }
             break;
     }
-    return lhs.backgroundImage == rhs.backgroundImage && lhs.textColor == rhs.textColor && *(lhs.additionalWidgetData.get()) == *(rhs.additionalWidgetData.get());
+    if (lhs.backgroundImage != rhs.backgroundImage || lhs.textColor != rhs.textColor) {
+        return false;
+    }
+    const AdditionalWidgetData* lhsAdditionalWidgetData = lhs.additionalWidgetData.get();
+    const AdditionalWidgetData* rhsAdditionalWidgetData = rhs.additionalWidgetData.get();
+    if (lhsAdditionalWidgetData != nullptr && rhsAdditionalWidgetData != nullptr) {
+        return *lhsAdditionalWidgetData == *rhsAdditionalWidgetData;
+    } else if (lhsAdditionalWidgetData == nullptr && rhsAdditionalWidgetData == nullptr) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 bool operator != (const WidgetData &lhs, const WidgetData &rhs) {

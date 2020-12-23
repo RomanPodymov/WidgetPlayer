@@ -1,12 +1,13 @@
 //
 //  mainwidget.cpp
-//  WidgetPlayer
+//  App
 //
 //  Created by Roman Podymov on 06/12/2020.
 //  Copyright © 2020 WidgetPlayer. All rights reserved.
 //
 
 #include "mainwidget.h"
+#include "foreignexchangerateswidget.h"
 #include "weatherwidget.h"
 #include "weatherwidgetadditionaldata.h"
 #include <QVBoxLayout>
@@ -138,6 +139,9 @@ WidgetData MainWidget::parseRensonse(QString response) {
                 widgetType, widgetWidth, widgetBackgroundImage, widgetTextColor
             );
             switch (itemData.widgetType) {
+            case WidgetData::WidgetType::foreignexchangerates: {
+                break;
+            }
             case WidgetData::WidgetType::weather: {
                 itemData.additionalWidgetData = QSharedPointer<AdditionalWidgetData>(
                     new WeatherWidgetAdditionalData(weatherAPIkey, item["location"].toString())
@@ -164,6 +168,10 @@ void MainWidget::updateUI(WidgetData widgetData) {
         foreach (const auto& item, row.items) {
             BaseWidget* rowWidget;
             switch (item.widgetType) {
+                case WidgetData::WidgetType::foreignexchangerates: {
+                    rowWidget = new ForeignExchangeRatesWidget(row, item);
+                    break;
+                }
                 case WidgetData::WidgetType::weather: {
                     rowWidget = new WeatherWidget(row, item);
                     break;

@@ -1,6 +1,6 @@
 //
 //  basewidget.cpp
-//  WidgetPlayer
+//  BaseWidget
 //
 //  Created by Roman Podymov on 07/12/2020.
 //  Copyright © 2020 WidgetPlayer. All rights reserved.

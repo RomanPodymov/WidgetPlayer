@@ -1,6 +1,6 @@
 //
 //  widgetdata.h
-//  WidgetPlayer
+//  BaseWidget
 //
 //  Created by Roman Podymov on 07/12/2020.
 //  Copyright © 2020 WidgetPlayer. All rights reserved.
@@ -23,7 +23,7 @@ public:
 };
 
 struct WidgetData {
-    enum WidgetType { unknown, weather };
+    enum WidgetType { unknown, foreignexchangerates, weather };
 
     enum WidgetSizeValueType { absolute, percentage };
 
