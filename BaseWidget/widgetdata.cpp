@@ -116,10 +116,8 @@ bool operator == (const WidgetData::Row::Item& lhs, const WidgetData::Row::Item&
     const AdditionalWidgetData* rhsAdditionalWidgetData = rhs.additionalWidgetData.get();
     if (lhsAdditionalWidgetData != nullptr && rhsAdditionalWidgetData != nullptr) {
         return *lhsAdditionalWidgetData == *rhsAdditionalWidgetData;
-    } else if (lhsAdditionalWidgetData == nullptr && rhsAdditionalWidgetData == nullptr) {
-        return true;
     } else {
-        return false;
+        return lhsAdditionalWidgetData == nullptr && rhsAdditionalWidgetData == nullptr;
     }
 }
 

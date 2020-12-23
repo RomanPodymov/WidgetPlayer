@@ -8,6 +8,7 @@
 
 #include "mainwidget.h"
 #include "foreignexchangerateswidget.h"
+#include "foreignexchangerateswidgetadditionaldata.h"
 #include "weatherwidget.h"
 #include "weatherwidgetadditionaldata.h"
 #include <QVBoxLayout>
@@ -140,6 +141,9 @@ WidgetData MainWidget::parseRensonse(QString response) {
             );
             switch (itemData.widgetType) {
             case WidgetData::WidgetType::foreignexchangerates: {
+                itemData.additionalWidgetData = QSharedPointer<AdditionalWidgetData>(
+                    new ForeignExchangeRatesWidgetAdditionalData(item["baseCurrency"].toString(), item["targetCurrency"].toString())
+                );
                 break;
             }
             case WidgetData::WidgetType::weather: {
