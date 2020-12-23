@@ -42,8 +42,7 @@ void WeatherWidget::parseRensonse(QString response) {
     const auto& jsonObject = jsonResponse.object();
     const auto& mainData = jsonObject["main"].toObject();
     const auto& mainDataTemp = mainData["temp"].toDouble();
-
-    currentTemperatureLabel->setText(QString::number(mainDataTemp));
+    currentTemperatureLabel->setText(WeatherWidget::tr("%n degree(s)", "", mainDataTemp));
 }
 
 void WeatherWidget::afterWeatherAPIReply() {
