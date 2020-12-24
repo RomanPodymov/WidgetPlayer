@@ -17,11 +17,13 @@ TRANSLATIONS += \
 
 INCLUDEPATH += \
     ../BaseWidget \
+    ../BaseAPIWidget \
     ../ForeignExchangeRatesWidget \
     ../WeatherWidget
 
 LIBS += \
     -L../BaseWidget -lBaseWidget \
+    -L../BaseAPIWidget -lBaseAPIWidget \
     -L../ForeignExchangeRatesWidget -lForeignExchangeRatesWidget \
     -L../WeatherWidget -lWeatherWidget
 

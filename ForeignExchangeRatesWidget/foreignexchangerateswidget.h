@@ -9,26 +9,20 @@
 #ifndef FOREIGNEXCHANGERATESWIDGET_H
 #define FOREIGNEXCHANGERATESWIDGET_H
 
-#include "basewidget.h"
+#include "baseapiwidget.h"
 #include <QPointer>
 #include <QLabel>
 
-class ForeignExchangeRatesWidget: public BaseWidget {
+class ForeignExchangeRatesWidget: public BaseAPIWidget {
     Q_OBJECT
 
 public:
     ForeignExchangeRatesWidget(WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
 
-private:
-    void update();
+protected:
     void parseRensonse(QString);
-    void afterAPIReply();
-
-private slots:
-    void onAPIReply(QNetworkReply*);
-
-private:
-    QPointer<QLabel> currentRateLabel;
+    QString getAPIDomainAndEndpoint();
+    APIQueryItems getAPIQueryItems();
 };
 
 #endif // FOREIGNEXCHANGERATESWIDGET_H

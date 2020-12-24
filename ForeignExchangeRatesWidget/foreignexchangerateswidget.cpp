@@ -13,26 +13,8 @@
 #include <QVBoxLayout>
 #include <QJsonDocument>
 
-ForeignExchangeRatesWidget::ForeignExchangeRatesWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): BaseWidget(row, item, parent),
-    currentRateLabel(new QLabel(this)) {
-    QPointer<QVBoxLayout> rootLayout(new QVBoxLayout());
-    rootLayout->setAlignment(Qt::AlignLeading | Qt::AlignTop);
-    setLayout(rootLayout);
-    rootLayout->addWidget(currentRateLabel);
-    QPalette currentRateLabelPalette = currentRateLabel->palette();
-    currentRateLabelPalette.setColor(currentRateLabel->foregroundRole(), item.textColor);
-    currentRateLabel->setPalette(currentRateLabelPalette);
-    QObject::connect(networkAccessManager.get(), SIGNAL(finished(QNetworkReply*)), this, SLOT(onAPIReply(QNetworkReply*)));
-    update();
-}
+ForeignExchangeRatesWidget::ForeignExchangeRatesWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): BaseAPIWidget(row, item, parent) {
 
-void ForeignExchangeRatesWidget::update() {
-    QUrl url("https://api.exchangeratesapi.io/latest");
-    QUrlQuery query;
-    const auto& foreignExchangeRatesWidgetAdditionalData = qSharedPointerCast<ForeignExchangeRatesWidgetAdditionalData>(item.additionalWidgetData);
-    query.addQueryItem("base", foreignExchangeRatesWidgetAdditionalData->baseCurrency);
-    url.setQuery(query);
-    networkAccessManager->get(QNetworkRequest(url));
 }
 
 void ForeignExchangeRatesWidget::parseRensonse(QString response) {
@@ -41,20 +23,14 @@ void ForeignExchangeRatesWidget::parseRensonse(QString response) {
     const auto& jsonObject = jsonResponse.object();
     const auto& rates = jsonObject["rates"].toObject();
     const auto& targetCurrencyRate = rates[foreignExchangeRatesWidgetAdditionalData->targetCurrency].toDouble();
-    currentRateLabel->setText(QString::number(targetCurrencyRate) + " " + foreignExchangeRatesWidgetAdditionalData->targetCurrency);
+    valueLabel->setText(QString::number(targetCurrencyRate) + " " + foreignExchangeRatesWidgetAdditionalData->targetCurrency);
 }
 
-void ForeignExchangeRatesWidget::afterAPIReply() {
-    QObject::disconnect(networkAccessManager.get(), SIGNAL(finished(QNetworkReply*)), this, SLOT(onAPIReply(QNetworkReply*)));
-    loadBackgroundImage();
+QString ForeignExchangeRatesWidget::getAPIDomainAndEndpoint() {
+    return "https://api.exchangeratesapi.io/latest";
 }
 
-void ForeignExchangeRatesWidget::onAPIReply(QNetworkReply *reply) {
-    if (reply->error()) {
-        afterAPIReply();
-        return;
-    }
-
-    parseRensonse(reply->readAll());
-    afterAPIReply();
+APIQueryItems ForeignExchangeRatesWidget::getAPIQueryItems() {
+    const auto& foreignExchangeRatesWidgetAdditionalData = qSharedPointerCast<ForeignExchangeRatesWidgetAdditionalData>(item.additionalWidgetData);
+    return QMap<QString,QString>({{"base",foreignExchangeRatesWidgetAdditionalData->baseCurrency}});
 }

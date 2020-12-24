@@ -9,26 +9,20 @@
 #ifndef WEATHERWIDGET_H
 #define WEATHERWIDGET_H
 
-#include "basewidget.h"
+#include "baseapiwidget.h"
 #include <QPointer>
 #include <QLabel>
 
-class WeatherWidget: public BaseWidget {
+class WeatherWidget: public BaseAPIWidget {
     Q_OBJECT
 
 public:
     WeatherWidget(WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
 
-private:
-    void update();
+protected:
     void parseRensonse(QString);
-    void afterWeatherAPIReply();
-
-private slots:
-    void onWeatherAPIReply(QNetworkReply*);
-
-private:
-    QPointer<QLabel> currentTemperatureLabel;
+    QString getAPIDomainAndEndpoint();
+    APIQueryItems getAPIQueryItems();
 };
 
 #endif // WEATHERWIDGET_H

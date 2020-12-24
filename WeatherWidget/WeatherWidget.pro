@@ -17,7 +17,12 @@ TRANSLATIONS += \
     Translations/Translations_WeatherWidget_cs.ts
 
 INCLUDEPATH += \
-    ../BaseWidget
+    ../BaseWidget \
+    ../BaseAPIWidget
+
+LIBS += \
+    -L../BaseWidget -lBaseWidget \
+    -L../BaseAPIWidget -lBaseAPIWidget
 
 RESOURCES += \
     weatherwidgetresources.qrc

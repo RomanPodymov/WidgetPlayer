@@ -13,4 +13,9 @@ HEADERS += \
     foreignexchangerateswidgetadditionaldata.h
 
 INCLUDEPATH += \
-    ../BaseWidget
+    ../BaseWidget \
+    ../BaseAPIWidget
+
+LIBS += \
+    -L../BaseWidget -lBaseWidget \
+    -L../BaseAPIWidget -lBaseAPIWidget
