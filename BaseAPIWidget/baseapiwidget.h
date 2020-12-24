@@ -19,12 +19,10 @@ class BaseAPIWidget: public BaseWidget {
     Q_OBJECT
 
 public:
-    BaseAPIWidget(WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
+    BaseAPIWidget(WidgetData::Row, WidgetData::Row::Item, QString, APIQueryItems, QWidget *parent = nullptr);
 
 protected:
     virtual void parseRensonse(QString) = 0;
-    virtual QString getAPIDomainAndEndpoint() = 0;
-    virtual APIQueryItems getAPIQueryItems() = 0;
 
 private:
     void update();
@@ -35,6 +33,10 @@ private slots:
 
 protected:
     const QPointer<QLabel> valueLabel;
+
+protected:
+    const QString apiDomainAndEndpoint;
+    const APIQueryItems apiQueryItems;
 };
 
 #endif // BASEAPIWIDGET_H

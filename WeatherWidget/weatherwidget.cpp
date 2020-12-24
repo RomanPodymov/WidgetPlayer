@@ -13,7 +13,18 @@
 #include <QVBoxLayout>
 #include <QJsonDocument>
 
-WeatherWidget::WeatherWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): BaseAPIWidget(row, item, parent) {
+WeatherWidget::WeatherWidget(
+    WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent
+): BaseAPIWidget(row, item, "http://api.openweathermap.org/data/2.5/weather", [item]{
+    const auto& weatherWidgetAdditionalData = qSharedPointerCast<WeatherWidgetAdditionalData>(item.additionalWidgetData);
+    return QMap<QString,QString>(
+        {
+            {"q",weatherWidgetAdditionalData->location},
+            {"APPID",weatherWidgetAdditionalData->APIkey},
+            {"units","metric"}
+        }
+    );
+}(), parent) {
 
 }
 
@@ -23,19 +34,4 @@ void WeatherWidget::parseRensonse(QString response) {
     const auto& mainData = jsonObject["main"].toObject();
     const auto& mainDataTemp = mainData["temp"].toDouble();
     valueLabel->setText((mainDataTemp > 0 ? "+" : "-") + WeatherWidget::tr("%n degree(s)", "", abs(mainDataTemp)));
-}
-
-QString WeatherWidget::getAPIDomainAndEndpoint() {
-    return "http://api.openweathermap.org/data/2.5/weather";
-}
-
-APIQueryItems WeatherWidget::getAPIQueryItems() {
-    const auto& weatherWidgetAdditionalData = qSharedPointerCast<WeatherWidgetAdditionalData>(item.additionalWidgetData);
-    return QMap<QString,QString>(
-        {
-            {"q",weatherWidgetAdditionalData->location},
-            {"APPID",weatherWidgetAdditionalData->APIkey},
-            {"units","metric"}
-        }
-    );
 }

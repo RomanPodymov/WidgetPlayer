@@ -21,8 +21,6 @@ public:
 
 protected:
     void parseRensonse(QString);
-    QString getAPIDomainAndEndpoint();
-    APIQueryItems getAPIQueryItems();
 };
 
 #endif // FOREIGNEXCHANGERATESWIDGET_H

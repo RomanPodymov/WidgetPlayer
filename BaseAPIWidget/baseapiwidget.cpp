@@ -13,8 +13,10 @@
 #include <QVBoxLayout>
 #include <QJsonDocument>
 
-BaseAPIWidget::BaseAPIWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): BaseWidget(row, item, parent),
-    valueLabel(new QLabel(this)) {
+BaseAPIWidget::BaseAPIWidget(WidgetData::Row row, WidgetData::Row::Item item, QString apiDomainAndEndpoint, APIQueryItems apiQueryItems, QWidget *parent): BaseWidget(row, item, parent),
+    valueLabel(new QLabel(this)),
+    apiDomainAndEndpoint(apiDomainAndEndpoint),
+    apiQueryItems(apiQueryItems) {
     QPointer<QVBoxLayout> rootLayout(new QVBoxLayout());
     rootLayout->setAlignment(Qt::AlignLeading | Qt::AlignTop);
     setLayout(rootLayout);
@@ -27,9 +29,8 @@ BaseAPIWidget::BaseAPIWidget(WidgetData::Row row, WidgetData::Row::Item item, QW
 }
 
 void BaseAPIWidget::update() {
-    QUrl url(getAPIDomainAndEndpoint());
+    QUrl url(apiDomainAndEndpoint);
     QUrlQuery query;
-    auto apiQueryItems = getAPIQueryItems();
     for (auto apiQueryItem : apiQueryItems.keys()) {
         query.addQueryItem(apiQueryItem, apiQueryItems.value(apiQueryItem));
     }
