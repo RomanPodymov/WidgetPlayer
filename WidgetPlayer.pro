@@ -7,7 +7,8 @@ SUBDIRS = \
     BaseAPIWidget \
     ForeignExchangeRatesWidget \
     WeatherWidget \
-    App
+    App \
+    WidgetPlayerTests
 
 App.depends = ForeignExchangeRatesWidget WeatherWidget
 BaseAPIWidget.depends = BaseWidget

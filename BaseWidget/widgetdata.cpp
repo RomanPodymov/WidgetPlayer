@@ -8,6 +8,10 @@
 
 #include "widgetdata.h"
 
+bool AdditionalWidgetData::operator != (const AdditionalWidgetData& rhs) const {
+    return !(*this == rhs);
+}
+
 WidgetData::WidgetData() {
     updateIntervalInSeconds = 10;
 }

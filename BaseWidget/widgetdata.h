@@ -20,6 +20,7 @@ class AdditionalWidgetData: public QObject {
 
 public:
     virtual bool operator == (const AdditionalWidgetData& rhs) const = 0;
+    bool operator != (const AdditionalWidgetData& rhs) const;
 };
 
 struct WidgetData {
