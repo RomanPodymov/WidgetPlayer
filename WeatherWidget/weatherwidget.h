@@ -21,6 +21,9 @@ public:
 
 protected:
     void parseRensonse(QString);
+
+private:
+    static QString createTemperatureString(int);
 };
 
 #endif // WEATHERWIDGET_H

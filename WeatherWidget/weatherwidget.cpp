@@ -33,5 +33,17 @@ void WeatherWidget::parseRensonse(QString response) {
     const auto& jsonObject = jsonResponse.object();
     const auto& mainData = jsonObject["main"].toObject();
     const auto& mainDataTemp = mainData["temp"].toDouble();
-    valueLabel->setText((mainDataTemp > 0 ? "+" : "-") + WeatherWidget::tr("%n degree(s)", "", abs(mainDataTemp)));
+    valueLabel->setText(WeatherWidget::createTemperatureString(mainDataTemp));
+}
+
+QString WeatherWidget::createTemperatureString(int value) {
+    QString temperatureSign;
+    if (value == 0) {
+        temperatureSign = "";
+    } else if (value < 0) {
+        temperatureSign = "-";
+    } else {
+        temperatureSign = "+";
+    }
+    return temperatureSign + WeatherWidget::tr("%n degree(s)", "", abs(value));
 }
