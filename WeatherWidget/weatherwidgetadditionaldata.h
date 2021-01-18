@@ -11,7 +11,7 @@
 
 #include "widgetdata.h"
 
-class WeatherWidgetAdditionalData: public AdditionalWidgetData {
+class WeatherWidgetAdditionalData final: public AdditionalWidgetData {
     Q_OBJECT
     friend class WeatherWidget;
 

@@ -10,10 +10,8 @@
 #define WEATHERWIDGET_H
 
 #include "baseapiwidget.h"
-#include <QPointer>
-#include <QLabel>
 
-class WeatherWidget: public BaseAPIWidget {
+class WeatherWidget final: public BaseAPIWidget {
     Q_OBJECT
 
 public:

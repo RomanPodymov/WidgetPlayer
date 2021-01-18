@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT       += core gui widgets network
+QT       += core gui widgets network multimediawidgets
 
 CONFIG += c++11
 
@@ -19,12 +19,14 @@ INCLUDEPATH += \
     ../BaseWidget \
     ../BaseAPIWidget \
     ../ForeignExchangeRatesWidget \
+    ../PlayerWidget \
     ../WeatherWidget
 
 LIBS += \
     -L../BaseWidget -lBaseWidget \
     -L../BaseAPIWidget -lBaseAPIWidget \
     -L../ForeignExchangeRatesWidget -lForeignExchangeRatesWidget \
+    -L../PlayerWidget -lPlayerWidget \
     -L../WeatherWidget -lWeatherWidget
 
 RESOURCES += \

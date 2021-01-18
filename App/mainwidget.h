@@ -19,7 +19,7 @@
 
 enum WidgetState { unknown, loading, content, error };
 
-class MainWidget: public QWidget {
+class MainWidget final: public QWidget {
     Q_OBJECT
 
 public:

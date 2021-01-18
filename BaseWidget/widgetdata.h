@@ -24,7 +24,7 @@ public:
 };
 
 struct WidgetData {
-    enum WidgetType { unknown, foreignexchangerates, weather };
+    enum WidgetType { unknown, foreignexchangerates, player, weather };
 
     enum WidgetSizeValueType { absolute, percentage };
 

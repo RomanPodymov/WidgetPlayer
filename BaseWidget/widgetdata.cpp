@@ -17,10 +17,12 @@ WidgetData::WidgetData() {
 }
 
 WidgetData::WidgetType WidgetData::widgetTypeFromString(QString typeString) {
-    if (typeString == "weather") {
-        return WidgetData::WidgetType::weather;
-    } else if (typeString == "rates") {
+    if (typeString == "rates") {
         return WidgetData::WidgetType::foreignexchangerates;
+    } else if (typeString == "weather") {
+        return WidgetData::WidgetType::weather;
+    } else if (typeString == "player") {
+        return WidgetData::WidgetType::player;
     } else {
         return WidgetData::WidgetType::unknown;
     }

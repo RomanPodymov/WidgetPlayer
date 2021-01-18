@@ -11,7 +11,7 @@
 
 #include "widgetdata.h"
 
-class ForeignExchangeRatesWidgetAdditionalData: public AdditionalWidgetData {
+class ForeignExchangeRatesWidgetAdditionalData final: public AdditionalWidgetData {
     Q_OBJECT
     friend class ForeignExchangeRatesWidget;
 

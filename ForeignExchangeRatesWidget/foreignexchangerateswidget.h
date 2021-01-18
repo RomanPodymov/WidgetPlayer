@@ -10,10 +10,8 @@
 #define FOREIGNEXCHANGERATESWIDGET_H
 
 #include "baseapiwidget.h"
-#include <QPointer>
-#include <QLabel>
 
-class ForeignExchangeRatesWidget: public BaseAPIWidget {
+class ForeignExchangeRatesWidget final: public BaseAPIWidget {
     Q_OBJECT
 
 public:
