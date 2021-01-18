@@ -9,8 +9,8 @@
 #include "mainwidget.h"
 #include "foreignexchangerateswidget.h"
 #include "foreignexchangerateswidgetadditionaldata.h"
-#include "playerwidget.h"
-#include "playerwidgetadditionaldata.h"
+#include "videowidget.h"
+#include "videowidgetadditionaldata.h"
 #include "weatherwidget.h"
 #include "weatherwidgetadditionaldata.h"
 #include <QVBoxLayout>
@@ -149,8 +149,8 @@ WidgetData MainWidget::parseRensonse(QString response) {
                 break;
             }
             case WidgetData::WidgetType::player: {
-                itemData.additionalWidgetData = QSharedPointer<PlayerWidgetAdditionalData>(
-                    new PlayerWidgetAdditionalData(item["videoURL"].toString())
+                itemData.additionalWidgetData = QSharedPointer<VideoWidgetAdditionalData>(
+                    new VideoWidgetAdditionalData(item["videoURL"].toString())
                 );
                 break;
             }
@@ -185,7 +185,7 @@ void MainWidget::updateUI(WidgetData widgetData) {
                     break;
                 }
                 case WidgetData::WidgetType::player: {
-                    rowWidget = new PlayerWidget(row, item);
+                    rowWidget = new VideoWidget(row, item);
                     break;
                 }
                 case WidgetData::WidgetType::weather: {

@@ -19,14 +19,14 @@ INCLUDEPATH += \
     ../BaseWidget \
     ../BaseAPIWidget \
     ../ForeignExchangeRatesWidget \
-    ../PlayerWidget \
+    ../VideoWidget \
     ../WeatherWidget
 
 LIBS += \
     -L../BaseWidget -lBaseWidget \
     -L../BaseAPIWidget -lBaseAPIWidget \
     -L../ForeignExchangeRatesWidget -lForeignExchangeRatesWidget \
-    -L../PlayerWidget -lPlayerWidget \
+    -L../VideoWidget -lVideoWidget \
     -L../WeatherWidget -lWeatherWidget
 
 RESOURCES += \

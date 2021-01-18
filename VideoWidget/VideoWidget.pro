@@ -5,12 +5,12 @@ QT       += core gui widgets multimediawidgets
 CONFIG += c++11 staticlib
 
 SOURCES += \
-    playerwidget.cpp \
-    playerwidgetadditionaldata.cpp
+    videowidget.cpp \
+    videowidgetadditionaldata.cpp
 
 HEADERS += \
-    playerwidget.h \
-    playerwidgetadditionaldata.h
+    videowidget.h \
+    videowidgetadditionaldata.h
 
 INCLUDEPATH += \
     ../BaseWidget

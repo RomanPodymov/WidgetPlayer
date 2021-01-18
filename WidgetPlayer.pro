@@ -6,7 +6,7 @@ SUBDIRS = \
     BaseWidget \
     BaseAPIWidget \
     ForeignExchangeRatesWidget \
-    PlayerWidget \
+    VideoWidget \
     WeatherWidget \
     App \
     WidgetPlayerTests

@@ -1,13 +1,13 @@
 //
-//  playerwidget.h
-//  PlayerWidget
+//  videowidget.h
+//  VideoWidget
 //
 //  Created by Roman Podymov on 17/01/2021.
 //  Copyright © 2021 WidgetPlayer. All rights reserved.
 //
 
-#ifndef PLAYERWIDGET_H
-#define PLAYERWIDGET_H
+#ifndef VIDEOWIDGET_H
+#define VIDEOWIDGET_H
 
 #include "basewidget.h"
 #include <QPointer>
@@ -15,11 +15,11 @@
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 
-class PlayerWidget final: public BaseWidget {
+class VideoWidget final: public BaseWidget {
     Q_OBJECT
 
 public:
-    PlayerWidget(WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
+    VideoWidget(WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
     void setupSize(QSize rootScreenSize);
 
 private:
@@ -28,4 +28,4 @@ private:
     const QPointer<QMediaPlaylist> mediaPlaylist;
 };
 
-#endif // PLAYERWIDGET_H
+#endif // VIDEOWIDGET_H
