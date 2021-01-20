@@ -9,6 +9,7 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
+#include "basewidget.h"
 #include "widgetdata.h"
 #include <QApplication>
 #include <QPointer>
@@ -40,6 +41,7 @@ private:
     void update();
     WidgetData parseRensonse(QString);
     void updateUI(WidgetData);
+    static QPointer<BaseWidget> createRowWidget(const WidgetData::Row& row, const WidgetData::Row::Item& item);
     static void clearLayout(QLayout* layout);
 
 private:

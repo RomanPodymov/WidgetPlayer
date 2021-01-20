@@ -11,8 +11,8 @@
 
 VideoWidget::VideoWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): BaseWidget(row, item, parent),
     videoWidget(new QVideoWidget(this)),
-    mediaPlayer(new QMediaPlayer()),
-    mediaPlaylist(new QMediaPlaylist()) {
+    mediaPlayer(new QMediaPlayer(this)),
+    mediaPlaylist(new QMediaPlaylist(this)) {
     const auto& videoWidgetAdditionalData = qSharedPointerCast<VideoWidgetAdditionalData>(item.additionalWidgetData);
     mediaPlaylist->addMedia(QUrl(videoWidgetAdditionalData->videoURL));
     mediaPlayer->setPlaylist(mediaPlaylist);

@@ -49,7 +49,7 @@ MainWidget::MainWidget(QApplication& application, QWidget *parent): QWidget(pare
         }
 
         switchWidgetState(WidgetState::content);
-        const auto& nextData = parseRensonse(reply->readAll());
+        const auto nextData = parseRensonse(reply->readAll());
         if (nextData != widgetData) {
             widgetData = nextData;
             updateUI(widgetData);
@@ -178,24 +178,7 @@ void MainWidget::updateUI(WidgetData widgetData) {
         itemsLayout->setSpacing(0);
         itemsLayout->setAlignment(Qt::AlignLeading | Qt::AlignTop);
         foreach (const auto& item, row.items) {
-            BaseWidget* rowWidget;
-            switch (item.widgetType) {
-                case WidgetData::WidgetType::foreignexchangerates: {
-                    rowWidget = new ForeignExchangeRatesWidget(row, item);
-                    break;
-                }
-                case WidgetData::WidgetType::player: {
-                    rowWidget = new VideoWidget(row, item);
-                    break;
-                }
-                case WidgetData::WidgetType::weather: {
-                    rowWidget = new WeatherWidget(row, item);
-                    break;
-                }
-                case WidgetData::WidgetType::unknown:
-                    rowWidget = nullptr;
-                    break;
-            }
+            QPointer<BaseWidget> rowWidget = MainWidget::createRowWidget(row, item);
             if (rowWidget != nullptr) {
                 QObject::connect(this, SIGNAL(rootScreenSizeChanged(QSize)), rowWidget, SLOT(onRootScreenSizeChanged(QSize)));
                 rowWidget->setupSize(frameSize());
@@ -207,6 +190,22 @@ void MainWidget::updateUI(WidgetData widgetData) {
         rootLayout->addLayout(itemsLayout);
     }
     rootLayout->addSpacerItem(new QSpacerItem(0, std::numeric_limits<uint>::max(), QSizePolicy::Minimum, QSizePolicy::Minimum));
+}
+
+QPointer<BaseWidget> MainWidget::createRowWidget(const WidgetData::Row& row, const WidgetData::Row::Item& item) {
+    switch (item.widgetType) {
+        case WidgetData::WidgetType::foreignexchangerates: {
+            return new ForeignExchangeRatesWidget(row, item);
+        }
+        case WidgetData::WidgetType::player: {
+            return new VideoWidget(row, item);
+        }
+        case WidgetData::WidgetType::weather: {
+            return new WeatherWidget(row, item);
+        }
+        case WidgetData::WidgetType::unknown:
+            return nullptr;
+    }
 }
 
 void MainWidget::clearLayout(QLayout* layout) {
