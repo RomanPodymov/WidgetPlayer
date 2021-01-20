@@ -11,7 +11,8 @@ SUBDIRS = \
     App \
     WidgetPlayerTests
 
-App.depends = ForeignExchangeRatesWidget WeatherWidget
+App.depends = ForeignExchangeRatesWidget VideoWidget WeatherWidget
 BaseAPIWidget.depends = BaseWidget
 ForeignExchangeRatesWidget.depends = BaseAPIWidget
+VideoWidget.depends = BaseWidget
 WeatherWidget.depends = BaseAPIWidget
