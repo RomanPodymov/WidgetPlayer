@@ -13,6 +13,7 @@
 #include "videowidgetadditionaldata.h"
 #include "weatherwidget.h"
 #include "weatherwidgetadditionaldata.h"
+#include <QTranslator>
 #include <QVBoxLayout>
 #include <QNetworkReply>
 #include <QJsonDocument>
@@ -30,6 +31,11 @@ MainWidget::MainWidget(const QApplication* application, QWidget *parent): QWidge
     weatherAPIkey(localConfiguration["weatherAPIkey"].toString()),
     maxRequestErrorCount(5),
     requestErrorCount(0) {
+    if (!translator.load(":/translations/strings")) {
+        BaseWidget::showAlert("Failed to load /translations/strings");
+        exit(EXIT_FAILURE);
+    }
+    application->installTranslator(&translator);
     QPointer<QVBoxLayout> rootLayout(new QVBoxLayout());
     rootLayout->setAlignment(Qt::AlignLeading | Qt::AlignTop);
     rootLayout->setSpacing(0);

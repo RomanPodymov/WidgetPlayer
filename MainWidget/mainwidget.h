@@ -46,6 +46,7 @@ private:
 
 private:
     const QPointer<QLabel> stateLabel;
+    QTranslator translator;
 
 private:
     const QPointer<const QApplication> application;
