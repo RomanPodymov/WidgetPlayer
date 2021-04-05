@@ -10,8 +10,8 @@
 #include <QApplication>
 
 int main(int argc, char *argv[]) {
-    Q_INIT_RESOURCE(weatherwidgetresources);
     Q_INIT_RESOURCE(mainwidgetresources);
+    Q_INIT_RESOURCE(weatherwidgetresources);
     QApplication a(argc, argv);
     MainWidget w(&a);
     w.show();

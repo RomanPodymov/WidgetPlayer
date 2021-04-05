@@ -61,6 +61,7 @@ MainWidget::MainWidget(const QApplication* application, QWidget *parent): QWidge
             updateUI(widgetData);
         }
         update(widgetState, true);
+        emit newDataReceived();
     });
     update(WidgetState::loading, false);
 }

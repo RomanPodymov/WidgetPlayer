@@ -1,4 +1,14 @@
+//
+//  widgetplayertests.cpp
+//  WidgetPlayerTests
+//
+//  Created by Roman Podymov on 27/12/2020.
+//  Copyright © 2020 WidgetPlayer. All rights reserved.
+//
+
 #include <QtTest>
+#include <QSignalSpy>
+#include "mainwidget.h"
 #include "foreignexchangerateswidgetadditionaldata.h"
 #include "weatherwidgetadditionaldata.h"
 
@@ -12,11 +22,13 @@ public:
 private slots:
     void initTestCase();
     void testWidgetAdditionalData();
+    void testMainWidgetNewDataReceived();
     void cleanupTestCase();
 };
 
 WidgetPlayerTests::WidgetPlayerTests() {
-
+    Q_INIT_RESOURCE(mainwidgetresources);
+    Q_INIT_RESOURCE(weatherwidgetresources);
 }
 
 WidgetPlayerTests::~WidgetPlayerTests() {
@@ -33,10 +45,17 @@ void WidgetPlayerTests::testWidgetAdditionalData() {
     QVERIFY(foreignExchangeRatesWidgetAdditionalData != weatherWidgetAdditionalData);
 }
 
+void WidgetPlayerTests::testMainWidgetNewDataReceived() {
+    MainWidget mainWidget(nullptr, nullptr);
+    QSignalSpy spy(&mainWidget, SIGNAL(newDataReceived()));
+    mainWidget.update();
+    QCOMPARE(spy.wait(5000), true);
+}
+
 void WidgetPlayerTests::cleanupTestCase() {
 
 }
 
 QTEST_MAIN(WidgetPlayerTests)
 
-#include "tst_widgetplayertests.moc"
+#include "widgetplayertests.moc"

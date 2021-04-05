@@ -30,6 +30,7 @@ public:
 
 signals:
     void rootScreenSizeChanged(QSize);
+    void newDataReceived();
 
 protected:
     void keyPressEvent(QKeyEvent *event);
