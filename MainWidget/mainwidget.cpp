@@ -1,6 +1,6 @@
 //
 //  mainwidget.cpp
-//  App
+//  MainWidget
 //
 //  Created by Roman Podymov on 06/12/2020.
 //  Copyright © 2020 WidgetPlayer. All rights reserved.
