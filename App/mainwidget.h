@@ -24,8 +24,9 @@ class MainWidget final: public QWidget {
     Q_OBJECT
 
 public:
-    MainWidget(QApplication& application, QWidget *parent = nullptr);
+    MainWidget(const QApplication* application, QWidget *parent = nullptr);
     ~MainWidget();
+    void update();
 
 signals:
     void rootScreenSizeChanged(QSize);
@@ -38,7 +39,6 @@ private:
     void switchWidgetState(WidgetState);
     static QJsonObject readLocalConfigurationJSON();
     void update(WidgetState, bool);
-    void update();
     WidgetData parseRensonse(QString);
     void updateUI(WidgetData);
     static QPointer<BaseWidget> createRowWidget(const WidgetData::Row& row, const WidgetData::Row::Item& item);
@@ -48,7 +48,7 @@ private:
     const QPointer<QLabel> stateLabel;
 
 private:
-    QApplication& application;
+    const QPointer<const QApplication> application;
     const QSharedPointer<QNetworkAccessManager> networkAccessManager;
     WidgetState widgetState;
     const QJsonObject localConfiguration;

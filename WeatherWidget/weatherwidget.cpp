@@ -25,7 +25,10 @@ WeatherWidget::WeatherWidget(
         }
     );
 }(), parent) {
-
+    if (!translator.load(":/translations_weather/weather_strings")) {
+        BaseWidget::showAlert("Failed to load /translations_weather/weather_strings");
+        exit(EXIT_FAILURE);
+    }
 }
 
 void WeatherWidget::parseRensonse(QString response) {

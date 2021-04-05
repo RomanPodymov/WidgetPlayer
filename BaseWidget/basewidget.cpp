@@ -8,6 +8,7 @@
 
 #include "basewidget.h"
 #include <QNetworkReply>
+#include <QMessageBox>
 
 BaseWidget::BaseWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): QWidget(parent),
     networkAccessManager(new QNetworkAccessManager()),
@@ -37,6 +38,15 @@ void BaseWidget::setupSize(QSize rootScreenSize) {
         default:
             break;
     }
+}
+
+void BaseWidget::showAlert(QString text) {
+    QMessageBox msgBox;
+    msgBox.setText("Error");
+    msgBox.setInformativeText(text);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
 }
 
 void BaseWidget::onRootScreenSizeChanged(QSize rootScreenSize) {

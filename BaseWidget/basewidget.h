@@ -20,6 +20,7 @@ class BaseWidget : public QWidget {
 public:
     BaseWidget(WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
     virtual void setupSize(QSize rootScreenSize);
+    static void showAlert(QString);
 
 public slots:
     void onRootScreenSizeChanged(QSize);

@@ -14,9 +14,12 @@ int main(int argc, char *argv[]) {
     Q_INIT_RESOURCE(weatherwidgetresources);
     QApplication a(argc, argv);
     QTranslator translator;
-    translator.load(":/translations/strings");
+    if (!translator.load(":/translations/strings")) {
+        BaseWidget::showAlert("Failed to load /translations/strings");
+        exit(EXIT_FAILURE);
+    }
     a.installTranslator(&translator);
-    MainWidget w(a);
+    MainWidget w(&a);
     w.show();
     return a.exec();
 }
