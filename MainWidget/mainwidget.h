@@ -10,6 +10,7 @@
 #define MAINWIDGET_H
 
 #include "basewidget.h"
+#include "translatorwidget.h"
 #include "widgetdata.h"
 #include <QApplication>
 #include <QPointer>
@@ -20,11 +21,11 @@
 
 enum WidgetState { unknown, loading, content, error };
 
-class MainWidget final: public QWidget {
+class MainWidget final: public TranslatorWidget {
     Q_OBJECT
 
 public:
-    MainWidget(const QApplication* application, QWidget *parent = nullptr);
+    MainWidget(const QApplication*, QWidget *parent = nullptr);
     ~MainWidget();
     void update();
 
@@ -42,15 +43,14 @@ private:
     void update(WidgetState, bool);
     WidgetData parseRensonse(QString);
     void updateUI(WidgetData);
-    static QPointer<BaseWidget> createRowWidget(const WidgetData::Row& row, const WidgetData::Row::Item& item);
+    static QPointer<BaseWidget> createRowWidget(const QApplication*, const WidgetData::Row& row, const WidgetData::Row::Item& item);
     static void clearLayout(QLayout* layout);
 
 private:
+    const QPointer<const QApplication> application;
     const QPointer<QLabel> stateLabel;
-    QTranslator translator;
 
 private:
-    const QPointer<const QApplication> application;
     const QSharedPointer<QNetworkAccessManager> networkAccessManager;
     WidgetState widgetState;
     const QJsonObject localConfiguration;

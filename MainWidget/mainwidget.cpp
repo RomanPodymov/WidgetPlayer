@@ -21,9 +21,9 @@
 #include <QJsonObject>
 #include <QTimer>
 
-MainWidget::MainWidget(const QApplication* application, QWidget *parent): QWidget(parent),
-    stateLabel(new QLabel(this)),
+MainWidget::MainWidget(const QApplication* application, QWidget *parent): TranslatorWidget(parent),
     application(application),
+    stateLabel(new QLabel(this)),
     networkAccessManager(new QNetworkAccessManager()),
     widgetState(WidgetState::unknown),
     localConfiguration(MainWidget::readLocalConfigurationJSON()),
@@ -31,11 +31,7 @@ MainWidget::MainWidget(const QApplication* application, QWidget *parent): QWidge
     weatherAPIkey(localConfiguration["weatherAPIkey"].toString()),
     maxRequestErrorCount(5),
     requestErrorCount(0) {
-    if (!translator.load(":/translations/strings")) {
-        BaseWidget::showAlert("Failed to load /translations/strings");
-        exit(EXIT_FAILURE);
-    }
-    application->installTranslator(&translator);
+    loadTranslations(application, ":/translations/strings");
     QPointer<QVBoxLayout> rootLayout(new QVBoxLayout());
     rootLayout->setAlignment(Qt::AlignLeading | Qt::AlignTop);
     rootLayout->setSpacing(0);
@@ -185,7 +181,7 @@ void MainWidget::updateUI(WidgetData widgetData) {
         itemsLayout->setSpacing(0);
         itemsLayout->setAlignment(Qt::AlignLeading | Qt::AlignTop);
         foreach (const auto& item, row.items) {
-            QPointer<BaseWidget> rowWidget = MainWidget::createRowWidget(row, item);
+            QPointer<BaseWidget> rowWidget = MainWidget::createRowWidget(application, row, item);
             if (rowWidget != nullptr) {
                 QObject::connect(this, SIGNAL(rootScreenSizeChanged(QSize)), rowWidget, SLOT(onRootScreenSizeChanged(QSize)));
                 rowWidget->setupSize(frameSize());
@@ -199,16 +195,16 @@ void MainWidget::updateUI(WidgetData widgetData) {
     rootLayout->addSpacerItem(new QSpacerItem(0, std::numeric_limits<uint>::max(), QSizePolicy::Minimum, QSizePolicy::Minimum));
 }
 
-QPointer<BaseWidget> MainWidget::createRowWidget(const WidgetData::Row& row, const WidgetData::Row::Item& item) {
+QPointer<BaseWidget> MainWidget::createRowWidget(const QApplication* application, const WidgetData::Row& row, const WidgetData::Row::Item& item) {
     switch (item.widgetType) {
         case WidgetData::WidgetType::foreignexchangerates: {
-            return new ForeignExchangeRatesWidget(row, item);
+            return new ForeignExchangeRatesWidget(application, row, item);
         }
         case WidgetData::WidgetType::player: {
-            return new VideoWidget(row, item);
+            return new VideoWidget(application, row, item);
         }
         case WidgetData::WidgetType::weather: {
-            return new WeatherWidget(row, item);
+            return new WeatherWidget(application, row, item);
         }
         case WidgetData::WidgetType::unknown:
             return nullptr;

@@ -13,7 +13,7 @@
 #include <QVBoxLayout>
 #include <QJsonDocument>
 
-BaseAPIWidget::BaseAPIWidget(WidgetData::Row row, WidgetData::Row::Item item, QString apiDomainAndEndpoint, APIQueryItems apiQueryItems, QWidget *parent): BaseWidget(row, item, parent),
+BaseAPIWidget::BaseAPIWidget(const QApplication* application, WidgetData::Row row, WidgetData::Row::Item item, QString apiDomainAndEndpoint, APIQueryItems apiQueryItems, QWidget *parent): BaseWidget(application, row, item, parent),
     valueLabel(new QLabel(this)),
     apiDomainAndEndpoint(apiDomainAndEndpoint),
     apiQueryItems(apiQueryItems) {

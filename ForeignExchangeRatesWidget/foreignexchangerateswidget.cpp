@@ -14,8 +14,8 @@
 #include <QJsonDocument>
 
 ForeignExchangeRatesWidget::ForeignExchangeRatesWidget(
-    WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent
-): BaseAPIWidget(row, item, "https://api.exchangeratesapi.io/latest", [item]{
+    const QApplication* application, WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent
+): BaseAPIWidget(application, row, item, "https://api.exchangeratesapi.io/latest", [item]{
     const auto& foreignExchangeRatesWidgetAdditionalData = qSharedPointerCast<ForeignExchangeRatesWidgetAdditionalData>(item.additionalWidgetData);
     return QMap<QString,QString>({{"base",foreignExchangeRatesWidgetAdditionalData->baseCurrency}});
 }(), parent) {

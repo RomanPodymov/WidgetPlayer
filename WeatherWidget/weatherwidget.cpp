@@ -14,8 +14,8 @@
 #include <QJsonDocument>
 
 WeatherWidget::WeatherWidget(
-    WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent
-): BaseAPIWidget(row, item, "http://api.openweathermap.org/data/2.5/weather", [item]{
+    const QApplication* application, WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent
+): BaseAPIWidget(application, row, item, "http://api.openweathermap.org/data/2.5/weather", [item]{
     const auto& weatherWidgetAdditionalData = qSharedPointerCast<WeatherWidgetAdditionalData>(item.additionalWidgetData);
     return QMap<QString,QString>(
         {
@@ -25,10 +25,7 @@ WeatherWidget::WeatherWidget(
         }
     );
 }(), parent) {
-    if (!translator.load(":/translations_weather/weather_strings")) {
-        BaseWidget::showAlert("Failed to load /translations_weather/weather_strings");
-        exit(EXIT_FAILURE);
-    }
+    loadTranslations(application, ":/translations_weather/weather_strings");
 }
 
 void WeatherWidget::parseRensonse(QString response) {

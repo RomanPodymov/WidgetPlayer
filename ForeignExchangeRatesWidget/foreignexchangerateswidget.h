@@ -15,7 +15,7 @@ class ForeignExchangeRatesWidget final: public BaseAPIWidget {
     Q_OBJECT
 
 public:
-    ForeignExchangeRatesWidget(WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
+    ForeignExchangeRatesWidget(const QApplication*, WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
 
 protected:
     void parseRensonse(QString);

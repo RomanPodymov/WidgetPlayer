@@ -19,7 +19,7 @@ class BaseAPIWidget: public BaseWidget {
     Q_OBJECT
 
 public:
-    BaseAPIWidget(WidgetData::Row, WidgetData::Row::Item, QString, APIQueryItems, QWidget *parent = nullptr);
+    BaseAPIWidget(const QApplication*, WidgetData::Row, WidgetData::Row::Item, QString, APIQueryItems, QWidget *parent = nullptr);
 
 protected:
     virtual void parseRensonse(QString) = 0;

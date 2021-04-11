@@ -9,7 +9,7 @@
 #include "videowidget.h"
 #include "videowidgetadditionaldata.h"
 
-VideoWidget::VideoWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): BaseWidget(row, item, parent),
+VideoWidget::VideoWidget(const QApplication* application, WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): BaseWidget(application, row, item, parent),
     videoWidget(new QVideoWidget(this)),
     mediaPlayer(new QMediaPlayer(this)),
     mediaPlaylist(new QMediaPlaylist(this)) {

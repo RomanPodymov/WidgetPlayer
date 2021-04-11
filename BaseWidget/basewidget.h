@@ -10,15 +10,17 @@
 #define BASEWIDGET_H
 
 #include "widgetdata.h"
+#include "translatorwidget.h"
+#include <QApplication>
 #include <QWidget>
 #include <QNetworkAccessManager>
 #include <QTranslator>
 
-class BaseWidget : public QWidget {
+class BaseWidget : public TranslatorWidget {
     Q_OBJECT
 
 public:
-    BaseWidget(WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
+    BaseWidget(const QApplication*, WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
     virtual void setupSize(QSize rootScreenSize);
     static void showAlert(QString);
 

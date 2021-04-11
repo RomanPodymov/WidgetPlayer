@@ -10,7 +10,7 @@
 #include <QNetworkReply>
 #include <QMessageBox>
 
-BaseWidget::BaseWidget(WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): QWidget(parent),
+BaseWidget::BaseWidget(const QApplication*, WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent): TranslatorWidget(parent),
     networkAccessManager(new QNetworkAccessManager()),
     row(row),
     item(item) {
