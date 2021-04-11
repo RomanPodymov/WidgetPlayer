@@ -20,6 +20,7 @@ class VideoWidget final: public BaseWidget {
 
 public:
     VideoWidget(const QApplication*, WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
+    CREATE_WIDGET(VideoWidget)
     void setupSize(QSize rootScreenSize);
 
 private:

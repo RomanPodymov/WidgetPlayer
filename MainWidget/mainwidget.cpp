@@ -196,19 +196,25 @@ void MainWidget::updateUI(WidgetData widgetData) {
 }
 
 QPointer<BaseWidget> MainWidget::createRowWidget(const QApplication* application, const WidgetData::Row& row, const WidgetData::Row::Item& item) {
+    CreateWidgetFunction createWidgetFunction;
     switch (item.widgetType) {
         case WidgetData::WidgetType::foreignexchangerates: {
-            return new ForeignExchangeRatesWidget(application, row, item);
+            createWidgetFunction = &ForeignExchangeRatesWidget::create;
+            break;
         }
         case WidgetData::WidgetType::player: {
-            return new VideoWidget(application, row, item);
+            createWidgetFunction = &VideoWidget::create;
+            break;
         }
         case WidgetData::WidgetType::weather: {
-            return new WeatherWidget(application, row, item);
+            createWidgetFunction = &WeatherWidget::create;
+            break;
         }
         case WidgetData::WidgetType::unknown:
             return nullptr;
     }
+    std::tuple<const QApplication*, const WidgetData::Row&, const WidgetData::Row::Item&, QWidget*> args(application, row, item, nullptr);
+    return std::apply(createWidgetFunction, args);
 }
 
 void MainWidget::clearLayout(QLayout* layout) {

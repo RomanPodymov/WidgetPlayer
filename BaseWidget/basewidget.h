@@ -16,6 +16,11 @@
 #include <QNetworkAccessManager>
 #include <QTranslator>
 
+#define CREATE_WIDGET(CLASS_NAME) \
+    static CLASS_NAME* create(const QApplication* application, WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent = nullptr) { \
+        return new CLASS_NAME(application, row, item, parent); \
+    }
+
 class BaseWidget : public TranslatorWidget {
     Q_OBJECT
 
@@ -41,5 +46,7 @@ protected:
     const WidgetData::Row row;
     const WidgetData::Row::Item item;
 };
+
+using CreateWidgetFunction = std::function<BaseWidget*(const QApplication*, WidgetData::Row, WidgetData::Row::Item, QWidget*)>;
 
 #endif // BASEWIDGET_H

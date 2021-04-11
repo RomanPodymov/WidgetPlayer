@@ -2,7 +2,7 @@ TEMPLATE = lib
 
 QT       += core gui widgets network multimediawidgets
 
-CONFIG += c++11 staticlib
+CONFIG += c++17 staticlib
 
 SOURCES += \
     mainwidget.cpp

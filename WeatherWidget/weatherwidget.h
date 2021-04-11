@@ -16,6 +16,7 @@ class WeatherWidget final: public BaseAPIWidget {
 
 public:
     WeatherWidget(const QApplication*, WidgetData::Row, WidgetData::Row::Item, QWidget *parent = nullptr);
+    CREATE_WIDGET(WeatherWidget)
 
 protected:
     void parseRensonse(QString);
