@@ -26,7 +26,6 @@ class MainWidget final: public TranslatorWidget {
 
 public:
     MainWidget(const QApplication*, QWidget *parent = nullptr);
-    ~MainWidget();
     void update();
 
 signals:

@@ -1,8 +1,6 @@
+include (../WidgetPlayerCommon.pri)
+
 TEMPLATE = app
-
-QT       += core gui widgets network multimediawidgets
-
-CONFIG += c++11
 
 SOURCES += \
     main.cpp

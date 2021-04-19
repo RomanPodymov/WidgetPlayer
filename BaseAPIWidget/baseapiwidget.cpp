@@ -31,7 +31,8 @@ BaseAPIWidget::BaseAPIWidget(const QApplication* application, WidgetData::Row ro
 void BaseAPIWidget::update() {
     QUrl url(apiDomainAndEndpoint);
     QUrlQuery query;
-    for (auto apiQueryItem : apiQueryItems.keys()) {
+    const auto keys = apiQueryItems.keys();
+    for (const auto& apiQueryItem : keys) {
         query.addQueryItem(apiQueryItem, apiQueryItems.value(apiQueryItem));
     }
     url.setQuery(query);

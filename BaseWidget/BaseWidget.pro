@@ -1,8 +1,8 @@
+include (../WidgetPlayerCommon.pri)
+
 TEMPLATE = lib
 
-QT       += core gui widgets network
-
-CONFIG += c++11 staticlib
+CONFIG += staticlib
 
 SOURCES += \
     widgetdata.cpp \

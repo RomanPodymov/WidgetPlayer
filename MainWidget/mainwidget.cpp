@@ -62,11 +62,8 @@ MainWidget::MainWidget(const QApplication* application, QWidget *parent): Transl
     update(WidgetState::loading, false);
 }
 
-MainWidget::~MainWidget() {
-}
-
 void MainWidget::keyPressEvent(QKeyEvent*) {
-    exit(0);
+    exit(EXIT_SUCCESS);
 }
 
 void MainWidget::resizeEvent(QResizeEvent *event) {

@@ -40,14 +40,14 @@ WidgetData::WidgetSizeValue WidgetData::widgetSizeValue(QString sizeValueString)
     WidgetData::WidgetSizeValue result;
     switch (WidgetData::widgetSizeValueType(sizeValueString)) {
         case WidgetData::WidgetSizeValueType::percentage: {
-            auto sizeValue = sizeValueString.left(sizeValueString.size() - 1).toDouble();
+            const auto sizeValue = sizeValueString.leftRef(sizeValueString.size() - 1).toDouble();
             WidgetData::WidgetSizeValue::Percentage percentageData;
             percentageData.value = sizeValue;
             result.percentage = percentageData;
             break;
         }
         case WidgetData::WidgetSizeValueType::absolute: {
-            auto sizeValue = sizeValueString.toDouble();
+            const auto sizeValue = sizeValueString.toDouble();
             WidgetData::WidgetSizeValue::Absolute absoluteData;
             absoluteData.value = sizeValue;
             result.absolute = absoluteData;
