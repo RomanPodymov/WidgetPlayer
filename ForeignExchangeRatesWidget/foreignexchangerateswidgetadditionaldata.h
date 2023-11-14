@@ -16,10 +16,11 @@ class ForeignExchangeRatesWidgetAdditionalData final: public AdditionalWidgetDat
     friend class ForeignExchangeRatesWidget;
 
 public:
-    ForeignExchangeRatesWidgetAdditionalData(QString baseCurrency, QString targetCurrency);
+    ForeignExchangeRatesWidgetAdditionalData(QString APIkey, QString baseCurrency, QString targetCurrency);
     bool operator == (const AdditionalWidgetData& rhs) const;
 
 private:
+    QString APIkey;
     QString baseCurrency;
     QString targetCurrency;
 };

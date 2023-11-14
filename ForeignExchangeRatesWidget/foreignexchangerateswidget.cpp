@@ -24,6 +24,9 @@ ForeignExchangeRatesWidget::ForeignExchangeRatesWidget(
             {"amount", "1"}
         }
     );
+}(), [item]{
+    const auto& foreignExchangeRatesWidgetAdditionalData = qSharedPointerCast<ForeignExchangeRatesWidgetAdditionalData>(item.additionalWidgetData);
+    return foreignExchangeRatesWidgetAdditionalData->APIkey;
 }(), parent) {
 
 }

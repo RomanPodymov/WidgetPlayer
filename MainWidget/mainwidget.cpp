@@ -30,6 +30,7 @@ MainWidget::MainWidget(const QApplication* application, QWidget *parent): Transl
     localConfiguration(MainWidget::readLocalConfigurationJSON()),
     widgetsConfigurationURL(localConfiguration["widgetsConfigurationURL"].toString()),
     weatherAPIkey(localConfiguration["weatherAPIkey"].toString()),
+    exchangeAPIkey(localConfiguration["exchangeAPIkey"].toString()),
     maxRequestErrorCount(5),
     requestErrorCount(0) {
     loadTranslations(application, ":/translations/strings");
@@ -145,7 +146,7 @@ WidgetData MainWidget::parseRensonse(QString response) {
             switch (itemData.widgetType) {
             case WidgetData::WidgetType::foreignexchangerates: {
                 itemData.additionalWidgetData = QSharedPointer<AdditionalWidgetData>(
-                    new ForeignExchangeRatesWidgetAdditionalData(item["baseCurrency"].toString(), item["targetCurrency"].toString())
+                    new ForeignExchangeRatesWidgetAdditionalData(exchangeAPIkey, item["baseCurrency"].toString(), item["targetCurrency"].toString())
                 );
                 break;
             }

@@ -24,7 +24,7 @@ WeatherWidget::WeatherWidget(
             {"units", "metric"}
         }
     );
-}(), parent) {
+}(), "", parent) {
     loadTranslations(application, ":/translations_weather/weather_strings");
 }
 

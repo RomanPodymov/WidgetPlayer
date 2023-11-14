@@ -55,6 +55,7 @@ private:
     const QJsonObject localConfiguration;
     const QString widgetsConfigurationURL;
     const QString weatherAPIkey;
+    const QString exchangeAPIkey;
     WidgetData widgetData;
     const quint8 maxRequestErrorCount;
     quint8 requestErrorCount;
