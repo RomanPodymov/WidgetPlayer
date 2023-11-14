@@ -19,9 +19,9 @@ WeatherWidget::WeatherWidget(
     const auto& weatherWidgetAdditionalData = qSharedPointerCast<WeatherWidgetAdditionalData>(item.additionalWidgetData);
     return QMap<QString,QString>(
         {
-            {"q",weatherWidgetAdditionalData->location},
-            {"APPID",weatherWidgetAdditionalData->APIkey},
-            {"units","metric"}
+            {"q", weatherWidgetAdditionalData->location},
+            {"APPID", weatherWidgetAdditionalData->APIkey},
+            {"units", "metric"}
         }
     );
 }(), parent) {

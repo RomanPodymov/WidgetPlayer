@@ -36,7 +36,9 @@ void BaseAPIWidget::update() {
         query.addQueryItem(apiQueryItem, apiQueryItems.value(apiQueryItem));
     }
     url.setQuery(query);
-    networkAccessManager->get(QNetworkRequest(url));
+    QNetworkRequest request(url);
+    request.setRawHeader("apikey", "");
+    networkAccessManager->get(request);
 }
 
 void BaseAPIWidget::afterAPIReply() {

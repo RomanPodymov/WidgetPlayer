@@ -13,7 +13,7 @@
 #include <QPointer>
 #include <QVideoWidget>
 #include <QMediaPlayer>
-#include <QMediaPlaylist>
+// #include <QMediaPlaylist>
 
 class VideoWidget final: public BaseWidget {
     Q_OBJECT
@@ -26,7 +26,7 @@ public:
 private:
     const QPointer<QVideoWidget> videoWidget;
     const QPointer<QMediaPlayer> mediaPlayer;
-    const QPointer<QMediaPlaylist> mediaPlaylist;
+    // const QPointer<QMediaPlaylist> mediaPlaylist;
 };
 
 #endif // VIDEOWIDGET_H

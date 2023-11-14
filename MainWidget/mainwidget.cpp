@@ -20,6 +20,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QTimer>
+#include <QFile>
 
 MainWidget::MainWidget(const QApplication* application, QWidget *parent): TranslatorWidget(parent),
     application(application),
@@ -130,10 +131,10 @@ WidgetData MainWidget::parseRensonse(QString response) {
     const auto& rows = jsonObject["rows"].toArray();
     WidgetData result;
     result.updateIntervalInSeconds = jsonObject["updateIntervalInSeconds"].toInt();
-    foreach (const auto& row, rows) {
+    for (const QJsonValue& row: rows) {
         WidgetData::WidgetData::Row rowData(row["height"].toString());
         const auto& items = row["items"].toArray();
-        foreach (const auto& item, items) {
+        for (const QJsonValue& item: items) {
             const auto& widgetType = item["type"].toString();
             const auto& widgetWidth = item["width"].toString();
             const auto& widgetBackgroundImage = item["backgroundImage"].toString();
