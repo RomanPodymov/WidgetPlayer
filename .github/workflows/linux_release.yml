@@ -31,7 +31,7 @@ jobs:
             shell: pwsh
             run: |
               cd build
-              qmake -makefile
+              qmake -makefile ../
               make
           - name: Test
             id: runtests
