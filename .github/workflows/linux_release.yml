@@ -31,8 +31,8 @@ jobs:
             shell: pwsh
             run: |
               cd build
-              cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_TESTING=ON ../
-              cmake --build .
+              qmake -makefile
+              make
           - name: Test
             id: runtests
             uses: GabrielBB/xvfb-action@v1
