@@ -1,61 +1,41 @@
-name: Linux Release
+name: Build and Test
 
 on:
   push
 
-defaults:
-  run:
-    shell: bash
-
-env:
-  SOURCE_DIR:   ${{ github.workspace }}
-  QT_VERSION:   6.6.0
-  ARTIFACT:     qt-planets-linux-build.AppImage
-
 jobs:
-  build:
-    runs-on:  ubuntu-18.04
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-        with:
-          submodules: recursive
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v2
-        with:
-          version:      ${{ env.QT_VERSION }}
-          host:         linux
-          target:       desktop
-          arch:         gcc_64
-          dir:          ${{ runner.temp }}
-          modules:      qtcharts qt3d
-          setup-python: false
-              
-      - name: Create build directory
-        run:  mkdir ${{ env.SOURCE_DIR }}/build
-
-      - name: Build
-        working-directory: ${{ env.SOURCE_DIR }}/build
-        run:  |
-              qmake -r ${{ env.SOURCE_DIR }}/WidgetPlayer.pro
-              make
-              
-      - name: AppImage
-        working-directory: ${{ env.SOURCE_DIR }}/build
-        run: |
-          wget -O deploy.AppImage https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
-          chmod +x deploy.AppImage
-          export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${{ github.workspace }}/Qt/6.6.0/gcc_64/lib/
-          cp ${{ env.SOURCE_DIR }}/linux/* .
-          ./deploy.AppImage planets-qml.desktop -appimage -no-translations -qmldir=${{ env.SOURCE_DIR }} -extra-plugins=renderers
-          mv Qt_planets_app*.AppImage ${{ env.ARTIFACT }}          
-      
-      - name: Linux artefact
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ env.ARTIFACT }}
-          path: ${{ env.SOURCE_DIR }}/build/${{ env.ARTIFACT }}
-
-              
+    build:
+        name: Build and Test Qt${{ matrix.qt_ver }}
+        runs-on: ubuntu-latest
+        strategy:
+          fail-fast: false
+          matrix:
+              qt_ver: [6.6.0]
+        steps:
+          - name: Install Qt
+            uses: jurplel/install-qt-action@v2
+            with:
+              version: ${{ matrix.qt_ver }}
+          - name: Git Checkout
+            uses: actions/checkout@v2
+          - name: Create Build Directory
+            shell: pwsh
+            run: |
+              mkdir build
+              cd build
+          - name: Install Linux Dependencies
+            run: |
+              sudo apt-get update -y
+              sudo apt-get install libxcb-icccm4 libxcb-xkb1 libxcb-icccm4 libxcb-image0 libxcb-render-util0 libxcb-randr0 libxcb-keysyms1 libxcb-xinerama0 libxcb-xinput-dev
+          - name: Build
+            shell: pwsh
+            run: |
+              cd build
+              cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_TESTING=ON ../
+              cmake --build .
+          - name: Test
+            id: runtests
+            uses: GabrielBB/xvfb-action@v1
+            with:
+              working-directory: ./build
+              run: cmake --build . --target test
