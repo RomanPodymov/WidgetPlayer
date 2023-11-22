@@ -16,7 +16,7 @@ jobs:
             uses: jurplel/install-qt-action@v2
             with:
               version: ${{ matrix.qt_ver }}
-              modules: [qtmultimedia5, libqt5multimedia5]
+              modules: 'qtmultimedia5 libqt5multimedia5'
           - name: Git Checkout
             uses: actions/checkout@v2
           - name: Create Build Directory
