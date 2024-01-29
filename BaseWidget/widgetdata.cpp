@@ -40,7 +40,7 @@ WidgetData::WidgetSizeValue WidgetData::widgetSizeValue(QString sizeValueString)
     WidgetData::WidgetSizeValue result;
     switch (WidgetData::widgetSizeValueType(sizeValueString)) {
         case WidgetData::WidgetSizeValueType::percentage: {
-            const auto sizeValue = sizeValueString.leftRef(sizeValueString.size() - 1).toDouble();
+            const auto sizeValue = QStringView{sizeValueString}.left(sizeValueString.size() - 1).toDouble();
             WidgetData::WidgetSizeValue::Percentage percentageData;
             percentageData.value = sizeValue;
             result.percentage = percentageData;

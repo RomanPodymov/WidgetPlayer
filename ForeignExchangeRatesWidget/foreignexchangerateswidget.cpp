@@ -15,9 +15,18 @@
 
 ForeignExchangeRatesWidget::ForeignExchangeRatesWidget(
     const QApplication* application, WidgetData::Row row, WidgetData::Row::Item item, QWidget *parent
-): BaseAPIWidget(application, row, item, "https://api.exchangeratesapi.io/latest", [item]{
+): BaseAPIWidget(application, row, item, "https://api.apilayer.com/fixer/convert", [item]{
     const auto& foreignExchangeRatesWidgetAdditionalData = qSharedPointerCast<ForeignExchangeRatesWidgetAdditionalData>(item.additionalWidgetData);
-    return QMap<QString,QString>({{"base",foreignExchangeRatesWidgetAdditionalData->baseCurrency}});
+    return QMap<QString, QString>(
+        {
+            {"from", foreignExchangeRatesWidgetAdditionalData->baseCurrency},
+            {"to", foreignExchangeRatesWidgetAdditionalData->targetCurrency},
+            {"amount", "1"}
+        }
+    );
+}(), [item]{
+    const auto& foreignExchangeRatesWidgetAdditionalData = qSharedPointerCast<ForeignExchangeRatesWidgetAdditionalData>(item.additionalWidgetData);
+    return foreignExchangeRatesWidgetAdditionalData->APIkey;
 }(), parent) {
 
 }
@@ -26,7 +35,7 @@ void ForeignExchangeRatesWidget::parseRensonse(QString response) {
     const auto& foreignExchangeRatesWidgetAdditionalData = qSharedPointerCast<ForeignExchangeRatesWidgetAdditionalData>(item.additionalWidgetData);
     const auto& jsonResponse = QJsonDocument::fromJson(response.toUtf8());
     const auto& jsonObject = jsonResponse.object();
-    const auto& rates = jsonObject["rates"].toObject();
-    const auto& targetCurrencyRate = rates[foreignExchangeRatesWidgetAdditionalData->targetCurrency].toDouble();
+    const auto& result = jsonObject["result"];
+    const auto& targetCurrencyRate = result.toDouble();
     valueLabel->setText(QString::number(targetCurrencyRate) + " " + foreignExchangeRatesWidgetAdditionalData->targetCurrency);
 }

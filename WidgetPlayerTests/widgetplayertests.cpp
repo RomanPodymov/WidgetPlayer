@@ -40,7 +40,7 @@ void WidgetPlayerTests::initTestCase() {
 }
 
 void WidgetPlayerTests::testWidgetAdditionalData() {
-    ForeignExchangeRatesWidgetAdditionalData foreignExchangeRatesWidgetAdditionalData("CZK", "USD");
+    ForeignExchangeRatesWidgetAdditionalData foreignExchangeRatesWidgetAdditionalData("", "CZK", "USD");
     WeatherWidgetAdditionalData weatherWidgetAdditionalData("CZK", "USD");
     QVERIFY(foreignExchangeRatesWidgetAdditionalData != weatherWidgetAdditionalData);
 }

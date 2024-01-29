@@ -20,6 +20,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QTimer>
+#include <QFile>
 
 MainWidget::MainWidget(const QApplication* application, QWidget *parent): TranslatorWidget(parent),
     application(application),
@@ -29,6 +30,7 @@ MainWidget::MainWidget(const QApplication* application, QWidget *parent): Transl
     localConfiguration(MainWidget::readLocalConfigurationJSON()),
     widgetsConfigurationURL(localConfiguration["widgetsConfigurationURL"].toString()),
     weatherAPIkey(localConfiguration["weatherAPIkey"].toString()),
+    exchangeAPIkey(localConfiguration["exchangeAPIkey"].toString()),
     maxRequestErrorCount(5),
     requestErrorCount(0) {
     loadTranslations(application, ":/translations/strings");
@@ -130,10 +132,10 @@ WidgetData MainWidget::parseRensonse(QString response) {
     const auto& rows = jsonObject["rows"].toArray();
     WidgetData result;
     result.updateIntervalInSeconds = jsonObject["updateIntervalInSeconds"].toInt();
-    foreach (const auto& row, rows) {
+    for (const QJsonValue& row: rows) {
         WidgetData::WidgetData::Row rowData(row["height"].toString());
         const auto& items = row["items"].toArray();
-        foreach (const auto& item, items) {
+        for (const QJsonValue& item: items) {
             const auto& widgetType = item["type"].toString();
             const auto& widgetWidth = item["width"].toString();
             const auto& widgetBackgroundImage = item["backgroundImage"].toString();
@@ -144,7 +146,7 @@ WidgetData MainWidget::parseRensonse(QString response) {
             switch (itemData.widgetType) {
             case WidgetData::WidgetType::foreignexchangerates: {
                 itemData.additionalWidgetData = QSharedPointer<AdditionalWidgetData>(
-                    new ForeignExchangeRatesWidgetAdditionalData(item["baseCurrency"].toString(), item["targetCurrency"].toString())
+                    new ForeignExchangeRatesWidgetAdditionalData(exchangeAPIkey, item["baseCurrency"].toString(), item["targetCurrency"].toString())
                 );
                 break;
             }

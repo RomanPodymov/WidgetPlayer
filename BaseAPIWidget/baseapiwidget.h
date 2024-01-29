@@ -19,7 +19,7 @@ class BaseAPIWidget: public BaseWidget {
     Q_OBJECT
 
 public:
-    BaseAPIWidget(const QApplication*, WidgetData::Row, WidgetData::Row::Item, QString, APIQueryItems, QWidget *parent = nullptr);
+    BaseAPIWidget(const QApplication*, WidgetData::Row, WidgetData::Row::Item, QString, APIQueryItems, QString, QWidget *parent = nullptr);
 
 protected:
     virtual void parseRensonse(QString) = 0;
@@ -37,6 +37,7 @@ protected:
 protected:
     const QString apiDomainAndEndpoint;
     const APIQueryItems apiQueryItems;
+    const QString additionalAPIKey;
 };
 
 #endif // BASEAPIWIDGET_H

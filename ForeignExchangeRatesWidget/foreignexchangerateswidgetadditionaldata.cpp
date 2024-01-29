@@ -16,7 +16,8 @@ bool ForeignExchangeRatesWidgetAdditionalData::operator == (const AdditionalWidg
     return baseCurrency == foreignExchangeRatesWidgetAdditionalData->baseCurrency && targetCurrency == foreignExchangeRatesWidgetAdditionalData->targetCurrency;
 }
 
-ForeignExchangeRatesWidgetAdditionalData::ForeignExchangeRatesWidgetAdditionalData(QString baseCurrency, QString targetCurrency):
+ForeignExchangeRatesWidgetAdditionalData::ForeignExchangeRatesWidgetAdditionalData(QString APIkey, QString baseCurrency, QString targetCurrency):
+    APIkey(APIkey),
     baseCurrency(baseCurrency),
     targetCurrency(targetCurrency) {
 

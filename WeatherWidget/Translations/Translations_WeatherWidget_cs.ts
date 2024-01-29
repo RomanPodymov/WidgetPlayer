@@ -4,6 +4,7 @@
 <context>
     <name>WeatherWidget</name>
     <message numerus="yes">
+        <location filename="../weatherwidget.cpp" line="48"/>
         <source>%n degree(s)</source>
         <translation>
             <numerusform>%n stupeň</numerusform>
