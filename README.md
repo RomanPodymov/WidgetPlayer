@@ -16,7 +16,6 @@ Set the following values in ```local_configuration.json```
 2) **weatherAPIkey**: Token for ```api.openweathermap.org```.
 3) **exchangeAPIkey**: Token for ```api.apilayer.com```.
 
-
 ## ```widgetsConfigurationURL``` response example
 
 ```
