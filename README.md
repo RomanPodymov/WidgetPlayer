@@ -12,12 +12,12 @@ Before building the app, run `lupdate` and `lrelease`
 ## ```local_configuration.json```
 
 Set the following values in ```local_configuration.json```
-1) **widgetsConfigurationURL**: URL to configuration JSON. See example below.
+1) **widgetsConfigurationURL**: URL for the widgets configuration. See response example below.
 2) **weatherAPIkey**: Token for ```api.openweathermap.org```.
 3) **exchangeAPIkey**: Token for ```api.apilayer.com```.
 
 
-## widgetsConfigurationURL
+## ```widgetsConfigurationURL``` response example
 
 ```
 {
